@@ -3,15 +3,16 @@ const div = document.getElementById("topDiv");
 const loadNews = async () => {
     // const div = document.getElementById("topDiv");
     try {
-
+        
         const res = await fetch(`https://api.nytimes.com/svc/books/v3/lists/current/hardcover-fiction.json?api-key=GDAa8Q5zaHgOlIfQW4PYAUgGV5yfQZs6`)
         const data = await res.json();
         console.log(data);
         Newses(data);
-        const debouncedCallback = debouncer(()=>fn(div.appendChild(result),"load"),500)
-        div.addEventListener("scroll",debouncedCallback)
-        Newses(data,"load");
-    }
+        // const debouncedCallback = debouncer(()=>fn(div.appendChild(result),"load"),500)
+        // div.addEventListener("scroll",debouncedCallback)
+        // Newses(data,"load");
+      
+}
     catch (err) {
 
     }
@@ -91,6 +92,9 @@ window.addEventListener("scroll",()=>{
     
    
     console.log("scroll")
-    // loadNews()
+    // 
+    if (window.scrollY + window.innerHeight >= document.documentElement.scrollHeight) {
+        loadNews()
+    }
     
 })
